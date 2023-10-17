@@ -15,9 +15,33 @@ public class NestedIfElseCheckConditionsElse {
     static String[] arrayInput;
 
     public static void main(String[] args) {
-        String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { if ( y > 0 ) { print(); } } } else { print(); }";
+        // START OF NO ERROR INPUTS
+        // NO NESTING
         // String input = "if ( x == 10.1 ) { print(); } else { print; }";
 
+        // NESTED ONCE
+        String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { print; } } else { print; }";
+
+        // NESTED TWICE
+        // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { if ( x == 0 ) { print(); } else { print(); } print(); } } else { print; }";
+        // END OF NO ERROR INPUTS
+
+        // START OF ERROR INPUTS
+        // No Space between tokens
+        // String input = "if ( x ==10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { print(); } } else { print; }";
+
+        // Not following condition rules
+        // String input = "if ( x == 10.1 ) { if ( y > 0 || 10 ) { print(); } else { print(); } } else { print; }";
+
+        // Incorrect statement inside If Statement
+        // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { 10 } else { if ( x == 0 ) { print(); } else { print(); } print(); } } else { print; }";
+
+        // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { if ( y > 0 ) { print(); } } } else { print(); }";
+
+        // (Insert inputs w/ error here)
+        // END OF ERROR INPUTS
+        
+        System.out.println("=================================================");
         System.out.println("Input:\n" + input);
         // split into array
         arrayInput = input.trim().split("\\s+");
@@ -26,16 +50,15 @@ public class NestedIfElseCheckConditionsElse {
         // pass to tokenizer
         String[] tokenized = tokenize(arrayInput);
         System.out.println("Tokenized Input:\n" + Arrays.toString(tokenized));
+        System.out.println("=================================================");
 
-        // add parsing logic here to analyze structure
-        // call check sequence
-        checkSequence(tokenized);
-
-        // call check if statements syntax
-        if (checkIfStatement(tokenized)) {
-            System.out.println("\nAll nested if statement structures are correct.");
-        } else {
-            System.out.println("\nIncorrect nested if statement structure detected.");
+        // Check For invalid tokens && Check Proper Sequence && Check If, else, and condition statements
+        if(!checkTokens(tokenized) || !checkSequence(tokenized) || !checkIfStatement(tokenized)){
+            System.out.println("=================================================");
+            System.out.println("Incorrect Syntax for Nested If-Else!");
+        }else{
+            System.out.println("=================================================");
+            System.out.println("Correct Overall Syntax for Nested If-Else!");
         }
     }
 
@@ -43,7 +66,6 @@ public class NestedIfElseCheckConditionsElse {
     public static boolean checkIfStatement(String[] token) {
         boolean syntax = true;
         for (int i = 0; i < token.length; i++) {
-
             if (syntax == false) {
                 return syntax;
             }
@@ -57,6 +79,7 @@ public class NestedIfElseCheckConditionsElse {
                 syntax = checkConditions(token, i - 1);
             }
         }
+        System.out.println("Correct If-Else Statement Formatting");
         return syntax;
     }
 
@@ -120,6 +143,17 @@ public class NestedIfElseCheckConditionsElse {
                 tokenList.add("invalid");
         }
         return tokenList.toArray(new String[0]);
+    }
+
+    // Returns true if no invalid tokens, otherwise false
+    public static boolean checkTokens(String[] tokens){
+        for(int i = 0; i < tokens.length ; i++){
+            if(tokens[i].equals("invalid")){
+                System.out.println("Invalid Token at index " + i + ". Follow Proper Syntax.");
+                return false;
+            }
+        }
+        return true;
     }
 
     // check for both balanced parentheses/curly braces and the proper nesting of
