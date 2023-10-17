@@ -34,7 +34,7 @@ public class NestedIfElseCheckConditionsElse {
         // String input = "if ( x == 10.1 ) { if ( y > 0 || 10 ) { print(); } else { print(); } } else { print; }";
 
         // Incorrect statement inside If Statement
-        // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { 10 } else { if ( x == 0 ) { print(); } else { print(); } print(); } } else { print; }";
+        // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { 10; } else { if ( x == 0 ) { print(); } else { print(); } print(); } } else { print; }";
 
         // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { if ( y > 0 ) { print(); } } } else { print(); }";
 
@@ -71,6 +71,7 @@ public class NestedIfElseCheckConditionsElse {
             }
             if (token[i].equals("if")) {
                 syntax = checkConditions(token, i);
+                syntax = checkStatement(token, i);
             }
             if (token[i].equals("else")) {
                 syntax = checkElseCondition(token, i + 2);
@@ -81,6 +82,22 @@ public class NestedIfElseCheckConditionsElse {
         }
         System.out.println("Correct If-Else Statement Formatting");
         return syntax;
+    }
+
+    public static boolean checkStatement(String[] token, int i){
+        for (; i<token.length; i++){
+            if(token[i].equals("{")){
+                if (token[i+1].equals("statement")) {
+                    return true;
+                }
+                if (token[i+1].equals("if")){
+                    return true;
+                }
+                System.out.println("Invalid Statement at index " + (i+1) + " | Incorrect input: " + arrayInput[i+1]);
+                return false;
+            }
+        }
+        return false;
     }
 
     public static boolean checkElseCondition(String[] token, int i) {
