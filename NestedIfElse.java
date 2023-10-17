@@ -9,13 +9,6 @@ public class NestedIfElse{
     static Set<String> comparisonOperators = new HashSet<>(Arrays.asList("==", "!=", ">=", ">=", "!=", ">", "<"));
     //logical operators
     static Set<String> logicalOperators = new HashSet<>(Arrays.asList("&&", "||"));
-    //Letters
-    static Set<String> letters = new HashSet<>(Arrays.asList(
-    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
-    "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
-    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
-    "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
-    ));
 
     public static void main(String[] args) {
     String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { print(); } } else { print; }\n";
@@ -43,16 +36,18 @@ public class NestedIfElse{
             } else if (separators.contains(input[i]) || comparisonOperators.contains(input[i])
                         || logicalOperators.contains(input[i])) {
                  tokenList.add(input[i]);
-            //number encountered (integer / decimal); will need to expand this to detect more errors
-            } else if (input[i].matches("-?\\d+") || input[i].matches("-?\\d+(\\.\\d+)?")) {
-                tokenList.add("number");
+            //number encountered (integer / decimal)
+            } else if (input[i].matches("-?\\d+")){
+                tokenList.add("integer");
+            } else if (input[i].matches("-?\\d+(\\.\\d+)?")){
+                tokenList.add("double");
             //characters encountered; will need to expand this to detect more errors
             } else if (input[i].matches("[a-zA-Z0-9_]+")) {
                 if(input[i].length() == 1)
                     tokenList.add("variable");
                 else //needs variablename validation
                     tokenList.add("variable");
-            //char value encountered
+            //single quote encountered (char value)
             } else if (input[i].startsWith("'") && input[i].endsWith("'") && input[i].length()==3) {
                 tokenList.add("'char'");
             } else if(input[i].trim().endsWith(";")){ 
