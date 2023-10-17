@@ -12,13 +12,15 @@ public class NestedIfElseCheckConditionsElse {
     // Valid <values>
     static Set<String> values = new HashSet<>(Arrays.asList("integer", "double", "float", "'char'", "variable"));
 
+    static String[] arrayInput;
+
     public static void main(String[] args) {
         String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { if ( y > 0 ) { print(); } } } else { print(); }";
         // String input = "if ( x == 10.1 ) { print(); } else { print; }";
 
         System.out.println("Input:\n" + input);
         // split into array
-        String[] arrayInput = input.trim().split("\\s+");
+        arrayInput = input.trim().split("\\s+");
         System.out.println("Input Coverted to String:\n" + Arrays.toString(arrayInput));
 
         // pass to tokenizer
@@ -31,9 +33,9 @@ public class NestedIfElseCheckConditionsElse {
 
         // call check if statements syntax
         if (checkIfStatement(tokenized)) {
-            System.out.println("\nAll if statement structures are correct.");
+            System.out.println("\nAll nested if statement structures are correct.");
         } else {
-            System.out.println("\nIncorrect If Statement Structure detected.");
+            System.out.println("\nIncorrect nested if statement structure detected.");
         }
     }
 
@@ -65,7 +67,7 @@ public class NestedIfElseCheckConditionsElse {
         if (token[i].equals("if")) {
             return checkConditions(token, i);
         }
-        System.out.println("Incorrect Else Structure at index " + i);
+        System.out.println("Incorrect Else Structure at index " + i + " | Incorrect input: " + arrayInput[i]);
         return false;
     }
 
@@ -78,7 +80,8 @@ public class NestedIfElseCheckConditionsElse {
                 !comparisonOperators.contains(token[i + 3]) || // comparison operator
                 !values.contains(token[i + 4]) || // value
                 (!logicalOperators.contains(token[i + 5]) && !token[i + 5].equals(")"))) {
-            System.out.println("Incorrect Condition Structure at index " + (i + 2));
+            System.out.println(
+                    "Incorrect Condition Structure at index " + (i + 2) + " | Incorrect input: " + arrayInput[i + 2]);
             return false;
         }
         System.out.println("Correct Condition Structure at index " + (i + 2));
