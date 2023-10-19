@@ -40,7 +40,19 @@ public class NestedIfElseCheckConditionsElse {
 
         // (Insert inputs w/ error here)
         // END OF ERROR INPUTS
+
+        // START OF UNRECOGNIZABLE ERROR INPUTS
+        // the "true" and "false" should be invalid with the comparison operators
+        // String input = "if ( x == 10.1 ) { if ( y > true || y < false ) { print(); } else { print; } } else { print; }";
         
+        // null, true, and false are treated as variable names
+        // String input = "if ( x == true ) { if ( y == null || y == false ) { print(); } else { print; } } else { print; }";
+
+        // "Else if" is not recognized and will throw an error (not sure dito)
+        // String input = "if ( x == 10.1 ) { else if ( y > 0 || y < 1 ) { print(); } else { print; } } else { print; }";
+        // END OF UNRECOGNIZABLE ERROR INPUTS
+
+        // START OF PROGRAM
         System.out.println("=================================================");
         System.out.println("Input:\n" + input);
         // split into array
