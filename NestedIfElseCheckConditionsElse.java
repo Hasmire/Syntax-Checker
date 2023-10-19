@@ -36,9 +36,12 @@ public class NestedIfElseCheckConditionsElse {
         // Incorrect statement inside If Statement
         // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { 10; } else { if ( x == 0 ) { print(); } else { print(); } print(); } } else { print; }";
 
-        // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { if ( y > 0 ) { print(); } } } else { print(); }";
+        // Imbalanced parentheses and/or curly brackets
+        // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { if ( y > 0 ) { print(); } } } } else { print(); }";
 
-        // (Insert inputs w/ error here)
+        // Incorrect sequence for if else
+        // String input = "if ( x == 10.1 ) { else ( y > 0 || y < 1 ) { print(); } else { if ( y > 0 ) { print(); } } } else { print(); }";
+
         // END OF ERROR INPUTS
 
         // START OF UNRECOGNIZABLE ERROR INPUTS
