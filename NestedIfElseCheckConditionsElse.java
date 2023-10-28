@@ -20,10 +20,13 @@ public class NestedIfElseCheckConditionsElse {
         // String input = "if ( x == 10.1 ) { print(); } else { print; }";
 
         // NESTED ONCE
-        String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { print; } } else { print; }";
-
+        // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { print; } } else { print; }";
+        // String input = "if ( x > b ) { print(); } else { if ( b > c ) { print(); } else { if ( c < d ) print(); } } }";
+        String input = "if ( c = b ) { print; } else { if ( b > c ) { print; } else { if ( c < d ) { print; } else { print; } } } ";        
         // NESTED TWICE
         // String input = "if ( x == 10.1 ) { if ( y > 0 || y < 1 ) { print(); } else { if ( x == 0 ) { print(); } else { print(); } print(); } } else { print; }";
+        // String input = "if ( c > d ) { if ( c > d ) { if ( c > d ) { print; } else { print; }";
+        // String input = "if ( c > d ) { print; } else { print; }";
         // END OF NO ERROR INPUTS
 
         // START OF ERROR INPUTS
